@@ -1,0 +1,47 @@
+//window setup
+int window_width = 500;
+int window_height = 500;
+string window_title = "window";
+int animation_speed = 100;
+int circ_size = 10;
+int circ_x_incr = 2;
+int circ_y_incr = 1;
+//int num_periods_incr = 1;
+
+int num_periods = 1;
+
+//forward animation circ_animation(circle cur_circ);
+forward animation sinewave(circle cur_circ);
+
+textbox txt(x = 10, y = 10, text = "Current period: " + num_periods, red = 1.0, size = .12);
+circle circ(radius = 5, green = .5, blue = .5, animation_block = sinewave);
+
+on leftarrow{
+	if(num_periods > 0){
+	num_periods--;
+	txt.text = "Current period: " + num_periods;
+	}
+}
+on rightarrow{
+num_periods++;
+	txt.text = "Current period: " + num_periods;
+}
+//animation circ_animation(circle cur_circ){
+//	if(cur_circ.x < 0 || cur_circ.x > window_width - circ_size)
+//		circ_x_incr = -circ_x_incr;
+//	if(cur_circ.y < 0 || cur_circ.y > window_height - circ_size)
+//		circ_y_incr = -circ_y_incr;
+//
+//	cur_circ.x += circ_x_incr; //* user_int;
+//	cur_circ.y += circ_y_incr; //* user_int2;
+//}
+
+animation sinewave(circle cur_circ){
+	if(cur_circ.x < 0 || cur_circ.x > window_width - circ_size)
+		circ_x_incr = -circ_x_incr;
+	if(cur_circ.y < 0 || cur_circ.y > window_height - circ_size)
+		circ_y_incr = -circ_y_incr;
+
+	cur_circ.x += circ_x_incr;  
+	cur_circ.y = circ_y_incr * floor(window_height/2.0 + window_height/2.0 * sin(360*num_periods * cur_circ.x/window_width));
+}

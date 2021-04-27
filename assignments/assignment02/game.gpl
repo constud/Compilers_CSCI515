@@ -1,0 +1,95 @@
+//Window Setup
+int window_width = 800;
+int window_height = 500;
+string window_title = "Maze Runner Game";
+int animation_speed = 90;
+
+//increments for runner and hurdles
+int hurdle_incr = 3;
+int runner_incr = 30;
+
+//Animation Block declarations
+forward animation hurdle_animation(rectangle cur_hurdle);
+forward animation hurdle_animation2(rectangle cur_hurdle2);
+forward animation hurdle_animation3(rectangle cur_hurdle3);
+forward animation hurdle_animation4(rectangle cur_hurdle4);
+
+//create hurdles
+rectangle hurdle(x = 100, w = 10, h = window_height - 250, animation_block = hurdle_animation);
+rectangle hurdle2(x = 275, y = window_height - 250, w = 10, h = window_height - 250, animation_block = hurdle_animation2);
+rectangle hurdle3(x = 700, y = window_height - 250, w = 10, h = window_height - 250, animation_block = hurdle_animation3);
+rectangle hurdle4(x = 500, w = 10, h = window_height - 250, animation_block = hurdle_animation4);
+
+//create runner
+triangle runner(x = 150, y = window_height/2 -55, size = 40);
+
+
+//Animation blocks for the hurdles to move across the screen
+animation hurdle_animation(rectangle cur_hurdle){
+	if(hurdle.x <= 0){
+		hurdle.x += window_width;
+	}
+
+	if(runner touches cur_hurdle){
+		runner.visible = false;
+		print("You Lose. Press the 'Q' key to quit.");
+	}
+	
+	hurdle.x += -hurdle_incr;
+}
+
+animation hurdle_animation2(rectangle cur_hurdle2){
+	if(hurdle2.x <= 0){
+		hurdle2.x += window_width;
+	}
+
+	if(runner touches cur_hurdle2){
+		runner.visible = false;
+		print("You Lose. Press the 'Q' key to quit.");
+	}
+	hurdle2.x += -hurdle_incr;
+}
+
+animation hurdle_animation3(rectangle cur_hurdle3){
+	if(hurdle3.x <= 0){
+		hurdle3.x += window_width;
+	}
+	if(runner touches cur_hurdle3){
+		runner.visible = false;
+		print("You Lose. Press the 'Q' key to quit.");
+	}
+	
+	hurdle3.x += -hurdle_incr;
+}
+
+animation hurdle_animation4(rectangle cur_hurdle4){
+	if(hurdle4.x <= 0){
+		hurdle4.x += window_width;
+	}
+	if(runner touches cur_hurdle4){
+		runner.visible = false;
+		print("You Lose. Press the 'Q' key to quit.");
+	}
+	
+	hurdle4.x += -hurdle_incr;
+}
+
+//controls for the runner
+on uparrow{
+	if(runner.y < window_height - runner_incr)
+		runner.y += runner_incr;
+}
+
+on downarrow{
+	if(runner.y > 0)
+		runner.y -= runner_incr;
+}
+
+on leftarrow{
+	if(runner.x > window_width/10)
+		runner.x -= runner_incr;
+}
+
+on rightarrow{
+		runner.x += runner_incr;
+}

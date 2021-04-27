@@ -1,0 +1,19 @@
+body {
+      background: black;
+      color: #80c0c0
+      }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+     width: 75%;
+   }
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  a:link { color: #ff8080 }
+  
+  a:visited { color: #ff0000 }
+  
+  a:active { color: #a05050 }
